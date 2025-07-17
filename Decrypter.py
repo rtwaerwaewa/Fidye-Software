@@ -26,13 +26,17 @@ def dosya_decrypt(klasor_yolu: str, key: bytes) -> list:
 
     i = 0
     while i < len(file_list):
-        with open(file_list[i], 'rb') as okunan_dosya:
-            icerik = okunan_dosya.read()
-        cozulmus_icerik = cryptography.fernet.Fernet(key).decrypt(icerik)
-        with open(file_list[i], 'wb') as yazilan_dosya:
-            yazilan_dosya.write(cozulmus_icerik)
-        print("[*] Dosya çözüldü! : {}".format(file_list[i]))
-        i = i + 1
+        try:
+            with open(file_list[i], 'rb') as okunan_dosya:
+                icerik = okunan_dosya.read()
+            cozulmus_icerik = cryptography.fernet.Fernet(key).decrypt(icerik)
+            with open(file_list[i], 'wb') as yazilan_dosya:
+                yazilan_dosya.write(cozulmus_icerik)
+            print("[*] Dosya çözüldü! : {}".format(file_list[i]))
+            i = i + 1
+        except Exception as err:
+            print(f"[!] Hata oluştu ({file_list[i]}): {e}")
+            sys.exit(1)
 
 def gpname() -> str:
     gpus = GPUtil.getGPUs()

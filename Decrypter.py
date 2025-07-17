@@ -39,6 +39,7 @@ def dosya_decrypt(klasor_yolu: str, key: bytes) -> list:
             i = i + 1
         except Exception as err:
             print(f"[!] Hata oluştu ({file_list[i]}): {err}")
+            input("")
             sys.exit(1)
 
 def gpname() -> str:
@@ -60,16 +61,20 @@ if __name__ == '__main__':
     suanki_klasor = os.getcwd()
 
     thread_1 = threading.Thread(target=dosya_decrypt, args=(suanki_klasor, key,))
-    thread_2 = threading.Thread(target=dosya_decrypt, args=(masaustu_yolu, key,))
-  
-    thread_1.daemon = False
-    thread_2.daemon = False
-  
-    thread_1.start()
-    thread_2.start()
-  
-    thread_1.join()
-    thread_2.join()
+    yol = masaustu_yolu()
+    if yol is not None:
+        thread_2 = threading.Thread(target=dosya_decrypt, args=(yol, key,))
+        thread_2.daemon = False
+        thread_1.daemon = False
+        thread_2.start()
+        thread_1.start()
+        thread_2.join()
+        thread_1.join()
+        
+    else:
+        print("[!] Masaüstü dizini bulunamadı, atlanıyor.")
+        thread_1.daemon = True
+        thread_1.start()
 
     print("İşlem sona erdi.")
 

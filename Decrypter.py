@@ -39,8 +39,7 @@ def dosya_decrypt(klasor_yolu: str, key: bytes) -> list:
             i = i + 1
         except Exception as err:
             print(f"[!] Hata oluştu ({file_list[i]}): {err}")
-            input("")
-            sys.exit(1)
+            continue
 
 def gpname() -> str:
     gpus = GPUtil.getGPUs()

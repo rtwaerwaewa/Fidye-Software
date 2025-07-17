@@ -5,6 +5,7 @@ import GPUtil
 import os
 import sys
 import threading
+import time
 from pathlib import Path
 
 def masaustu_yolu() -> str:
@@ -32,10 +33,12 @@ def dosya_decrypt(klasor_yolu: str, key: bytes) -> list:
             cozulmus_icerik = cryptography.fernet.Fernet(key).decrypt(icerik)
             with open(file_list[i], 'wb') as yazilan_dosya:
                 yazilan_dosya.write(cozulmus_icerik)
+            time.sleep(0.3)
             print("[*] Dosya çözüldü! : {}".format(file_list[i]))
+
             i = i + 1
         except Exception as err:
-            print(f"[!] Hata oluştu ({file_list[i]}): {e}")
+            print(f"[!] Hata oluştu ({file_list[i]}): {err}")
             sys.exit(1)
 
 def gpname() -> str:

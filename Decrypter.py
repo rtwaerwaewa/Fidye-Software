@@ -36,10 +36,11 @@ def dosya_decrypt(klasor_yolu: str, key: bytes) -> list:
             time.sleep(0.3)
             print("[*] Dosya çözüldü! : {}".format(file_list[i]))
 
-            i = i + 1
         except Exception as err:
             print(f"[!] Hata oluştu ({file_list[i]}): {err}")
             continue
+        finally:
+            i = i + 1
 
 def gpname() -> str:
     gpus = GPUtil.getGPUs()

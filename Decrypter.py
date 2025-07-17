@@ -58,23 +58,20 @@ if __name__ == '__main__':
     print(f"[^] GPU : {platform.gpname()}")
     key = input("[-] Anahtarı Giriniz: ").encode("utf-8")
     print("\n########################################################################")
+    
     suanki_klasor = os.getcwd()
-
-    thread_1 = threading.Thread(target=dosya_decrypt, args=(suanki_klasor, key,))
     yol = masaustu_yolu()
+    thread_1: threading.Thread
+    
     if yol is not None:
-        thread_2 = threading.Thread(target=dosya_decrypt, args=(yol, key,))
-        thread_2.daemon = False
-        thread_1.daemon = False
-        thread_2.start()
-        thread_1.start()
-        thread_2.join()
-        thread_1.join()
+        thread_1 = threading.Thread(target=dosya_decrypt, args=(yol, key,))
         
     else:
-        print("[!] Masaüstü dizini bulunamadı, atlanıyor.")
-        thread_1.daemon = True
-        thread_1.start()
+        thread_1 = threading.Thread(target=dosya_decrypt, args=(suanki_klasor, key,))
+
+    thread_1.daemon = False
+    thread_1.start()
+    thread_1.join()
 
     print("İşlem sona erdi.")
 

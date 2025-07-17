@@ -1,1 +1,1 @@
-# Fidye-Software
+# Ransomware-Software

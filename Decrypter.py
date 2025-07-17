@@ -19,6 +19,8 @@ def dosya_decrypt(klasor_yolu: str, key: bytes) -> list:
     dosyaklasor_list = os.walk(klasor_yolu)
     for root, dirs, files in dosyaklasor_list:
         for file in files:
+            if file == "Decrypter.py":
+                continue
             full_path = os.path.join(root, file)
             file_list.append(full_path)
 
